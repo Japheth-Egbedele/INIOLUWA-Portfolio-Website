@@ -14,10 +14,10 @@ export default function PortfolioGrid({ content }) {
         key={content.id}
       >
         <div className={`w-1 h-6 md:h-8 rounded-full bg-gradient-to-b ${content.color}`} />
-        <h2 className="text-lg md:text-2xl font-bold text-white text-shadow">
+        <h2 className="text-lg md:text-2xl font-bold text-gray-800">
           {content.label}
         </h2>
-        <span className="text-white/70 text-xs md:text-sm">
+        <span className="text-gray-500 text-xs md:text-sm">
           {content.items.length} videos
         </span>
       </motion.div>
@@ -84,7 +84,7 @@ function VideoCard({ item, index, color }) {
 
       {/* Title */}
       <div className="p-2 md:p-3">
-        <h3 className="text-white font-medium text-xs md:text-sm truncate text-shadow">
+        <h3 className="text-gray-800 font-medium text-xs md:text-sm truncate">
           {item.title}
         </h3>
         <div className={`mt-1.5 md:mt-2 h-0.5 md:h-1 rounded-full bg-gradient-to-r ${color} w-2/3`} />

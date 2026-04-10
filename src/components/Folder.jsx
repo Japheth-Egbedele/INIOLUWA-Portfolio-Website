@@ -28,9 +28,24 @@ export default function Folder({ folder, isActive, onClick }) {
       whileHover={{ y: -8 }}
       whileTap={{ scale: 0.95 }}
     >
+      {/* Active rotating ring with colorful orbiting balls */}
+      {isActive && (
+        <motion.div
+          className="absolute inset-0 -m-4 md:-m-6 pointer-events-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        >
+          {/* 3 colorful orbiting balls */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-emerald-400 rounded-full shadow-lg shadow-emerald-400/60 ring-2 ring-white" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2.5 h-2.5 md:w-3 md:h-3 bg-cyan-400 rounded-full shadow-md shadow-cyan-400/50 ring-2 ring-white" />
+          <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-2.5 md:h-2.5 bg-amber-400 rounded-full shadow-md shadow-amber-400/50 ring-2 ring-white" />
+          <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-2 h-2 md:w-2.5 md:h-2.5 bg-rose-400 rounded-full shadow-md shadow-rose-400/50 ring-2 ring-white" />
+        </motion.div>
+      )}
+
       {/* Active glow */}
       {isActive && (
-        <div className="absolute inset-0 bg-white/30 blur-xl rounded-full -z-10" />
+        <div className="absolute inset-0 bg-white/20 blur-xl rounded-full -z-10" />
       )}
 
       <div className={`
@@ -38,7 +53,7 @@ export default function Folder({ folder, isActive, onClick }) {
         bg-gradient-to-br ${folder.color}
         transition-all duration-300 shadow-lg
         ${isActive
-          ? 'ring-2 ring-white/80 shadow-xl'
+          ? 'ring-2 ring-white/60 shadow-2xl'
           : 'hover:shadow-xl'
         }
       `}>
@@ -50,7 +65,7 @@ export default function Folder({ folder, isActive, onClick }) {
           strokeWidth={1.5}
         />
       </div>
-      <span className="text-[10px] md:text-xs font-medium text-white whitespace-nowrap">
+      <span className={`text-[10px] md:text-xs font-semibold whitespace-nowrap ${isActive ? 'text-gray-800' : 'text-gray-300'}`}>
         {folder.label}
       </span>
     </motion.button>

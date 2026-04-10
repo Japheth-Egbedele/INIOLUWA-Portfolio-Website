@@ -10,10 +10,10 @@ export default function ProfileWidget() {
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
-      {/* Avatar */}
+      {/* Avatar with green ring accent */}
       <div className="relative">
         <motion.div
-          className="w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-white/80 shadow-lg"
+          className="w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-emerald-400 shadow-lg shadow-emerald-400/30 ring-2 ring-emerald-300/50"
           animate={{ rotate: [0, 5, -5, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -23,13 +23,15 @@ export default function ProfileWidget() {
             className="w-full h-full object-cover"
           />
         </motion.div>
-        {/* Online indicator */}
-        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white shadow-sm" />
+        {/* Online indicator - emerald green */}
+        <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
+        {/* Subtle green accent line beside avatar */}
+        <div className="absolute -right-1.5 top-1/2 -translate-y-1/2 translate-x-full w-0.5 h-6 md:h-8 bg-gradient-to-b from-emerald-400 to-teal-500 rounded-full opacity-60" />
       </div>
 
       {/* Info */}
       <div className="min-w-[100px]">
-        <h3 className="text-gray-800 font-bold text-sm md:text-lg leading-tight">
+        <h3 className="text-gray-900 font-bold text-sm md:text-lg leading-tight">
           {profileData.name}
         </h3>
         <p className="text-gray-600 text-[10px] md:text-xs truncate">
@@ -39,19 +41,19 @@ export default function ProfileWidget() {
         {/* Stats - visible on both */}
         <div className="flex items-center space-x-2 mt-1 text-[10px] md:text-xs text-gray-600">
           <span className="font-medium">
-            <strong className="text-gray-800">{profileData.stats.projects}</strong> projects
+            <strong className="text-gray-900">{profileData.stats.projects}</strong> projects
           </span>
           <span className="text-gray-400">|</span>
           <span className="font-medium">
-            <strong className="text-gray-800">{profileData.stats.clients}</strong> clients
+            <strong className="text-gray-900">{profileData.stats.clients}</strong> clients
           </span>
         </div>
 
         {/* Social icons - hidden on mobile */}
         <div className="hidden md:flex items-center space-x-2 mt-2">
-          <SocialIcon icon={FaInstagram} href={profileData.social.instagram} color="hover:text-pink-500" />
-          <SocialIcon icon={FaYoutube} href={profileData.social.youtube} color="hover:text-red-500" />
-          <SocialIcon icon={FaTwitter} href={profileData.social.twitter} color="hover:text-blue-400" />
+          <SocialIcon icon={FaInstagram} href={profileData.social.instagram} color="text-gray-500 hover:text-pink-500" />
+          <SocialIcon icon={FaYoutube} href={profileData.social.youtube} color="text-gray-500 hover:text-red-500" />
+          <SocialIcon icon={FaTwitter} href={profileData.social.twitter} color="text-gray-500 hover:text-blue-400" />
         </div>
       </div>
     </motion.div>
