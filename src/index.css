@@ -155,3 +155,32 @@
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+/* Dark mode overrides */
+.dark {
+  color-scheme: dark;
+}
+
+.dark .water-bg {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+}
+
+.dark .water-bg::before {
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(100, 150, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(80, 180, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}

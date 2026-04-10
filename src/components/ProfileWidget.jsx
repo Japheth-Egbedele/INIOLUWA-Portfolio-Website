@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
-import { FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
+import { Mail, Phone } from 'lucide-react';
+import { FaInstagram } from 'react-icons/fa';
 import { profileData } from '../data/portfolioData';
 
 export default function ProfileWidget() {
@@ -31,44 +31,47 @@ export default function ProfileWidget() {
 
       {/* Info */}
       <div className="min-w-[100px]">
-        <h3 className="text-gray-900 font-bold text-sm md:text-lg leading-tight">
+        <h3 className="text-gray-900 dark:text-white font-bold text-sm md:text-lg leading-tight">
           {profileData.name}
         </h3>
-        <p className="text-gray-600 text-[10px] md:text-xs truncate">
+        <p className="text-gray-600 dark:text-gray-400 text-[10px] md:text-xs truncate">
           {profileData.title}
         </p>
 
         {/* Stats - visible on both */}
-        <div className="flex items-center space-x-2 mt-1 text-[10px] md:text-xs text-gray-600">
+        <div className="flex items-center space-x-2 mt-1 text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
           <span className="font-medium">
-            <strong className="text-gray-900">{profileData.stats.projects}</strong> projects
+            <strong className="text-gray-900 dark:text-white">{profileData.stats.projects}</strong> projects
           </span>
-          <span className="text-gray-400">|</span>
+          <span className="text-gray-400 dark:text-gray-500">|</span>
           <span className="font-medium">
-            <strong className="text-gray-900">{profileData.stats.clients}</strong> clients
+            <strong className="text-gray-900 dark:text-white">{profileData.stats.experience}</strong> experience
           </span>
         </div>
 
         {/* Social icons - hidden on mobile */}
-        <div className="hidden md:flex items-center space-x-2 mt-2">
-          <SocialIcon icon={FaInstagram} href={profileData.social.instagram} color="text-gray-500 hover:text-pink-500" />
-          <SocialIcon icon={FaYoutube} href={profileData.social.youtube} color="text-gray-500 hover:text-red-500" />
-          <SocialIcon icon={FaTwitter} href={profileData.social.twitter} color="text-gray-500 hover:text-blue-400" />
+        <div className="hidden md:flex items-center space-x-3 mt-2">
+          <SocialIcon icon={FaInstagram} href={profileData.social.instagram} color="text-gray-500 dark:text-gray-400 hover:text-pink-500" label="Instagram" />
+          <SocialIcon icon={Mail} href={profileData.social.email} color="text-gray-500 dark:text-gray-400 hover:text-emerald-500" label="Email" />
+          <SocialIcon icon={Phone} href={profileData.social.phone} color="text-gray-500 dark:text-gray-400 hover:text-blue-500" label="Phone" />
         </div>
       </div>
     </motion.div>
   );
 }
 
-function SocialIcon({ icon: Icon, href, color }) {
+function SocialIcon({ icon: Icon, href, color, label }) {
   return (
     <motion.a
       href={href}
       className={`text-gray-500 transition-colors ${color}`}
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.9 }}
+      aria-label={label}
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
     >
-      <Icon size={14} />
+      <Icon size={16} />
     </motion.a>
   );
 }

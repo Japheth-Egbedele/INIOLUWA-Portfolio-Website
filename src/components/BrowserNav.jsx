@@ -7,13 +7,15 @@ import {
   Home,
   Search,
   Star,
-  Menu,
-  X
+  Sun,
+  Moon
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export default function BrowserNav() {
   const [url, setUrl] = useState('inioluwa.portfolio');
   const [isSecure, setIsSecure] = useState(true);
+  const { theme, toggleTheme, isDark } = useTheme();
 
   return (
     <div className="bg-gradient-to-r from-emerald-600 to-teal-500 px-2 md:px-4 py-2 flex items-center space-x-2 md:space-x-3 sticky top-0 z-50 shadow-lg shadow-emerald-900/20">
@@ -51,14 +53,20 @@ export default function BrowserNav() {
         <Star className="w-4 h-4 text-amber-400 hover:text-amber-500 cursor-pointer transition-colors" />
       </div>
 
-      {/* Right Side */}
+      {/* Right Side - Theme Toggle */}
       <div className="flex items-center space-x-2">
         <motion.button
-          className="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
-          whileHover={{ scale: 1.05 }}
+          onClick={toggleTheme}
+          className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+          whileHover={{ scale: 1.05, rotate: 15 }}
           whileTap={{ scale: 0.95 }}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          <Menu className="w-5 h-5 text-white/90 hover:text-white" />
+          {isDark ? (
+            <Sun className="w-4 h-4 text-amber-300" />
+          ) : (
+            <Moon className="w-4 h-4 text-white" />
+          )}
         </motion.button>
       </div>
     </div>

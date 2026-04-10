@@ -65,7 +65,7 @@ export default function Folder({ folder, isActive, onClick }) {
           strokeWidth={1.5}
         />
       </div>
-      <span className={`text-[10px] md:text-xs font-semibold whitespace-nowrap ${isActive ? 'text-gray-800' : 'text-gray-300'}`}>
+      <span className={`text-[10px] md:text-xs font-semibold whitespace-nowrap ${isActive ? 'text-gray-800 dark:text-white' : 'text-gray-300 dark:text-gray-500'}`}>
         {folder.label}
       </span>
     </motion.button>

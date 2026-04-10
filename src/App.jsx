@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { portfolioData } from './data/portfolioData';
+import { useTheme } from './context/ThemeContext';
 import WaterBackground from './components/WaterBackground';
 import BrowserNav from './components/BrowserNav';
 import Shelf from './components/Shelf';
@@ -10,11 +11,12 @@ import PortfolioGrid from './components/PortfolioGrid';
 function App() {
   // Set first folder as default
   const [activeFolder, setActiveFolder] = useState(portfolioData[0].id);
+  const { isDark } = useTheme();
 
   const activeContent = portfolioData.find(folder => folder.id === activeFolder);
 
   return (
-    <div className="min-h-screen relative">
+    <div className={`min-h-screen relative transition-colors duration-300 ${isDark ? 'dark bg-gray-900' : 'bg-blue-50'}`}>
       {/* Animated Water Background */}
       <WaterBackground />
 

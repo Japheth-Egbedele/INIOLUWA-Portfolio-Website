@@ -56,11 +56,13 @@ export const portfolioData = [
       { id: 1, title: 'Wedding Highlight', thumbnail: 'https://picsum.photos/300/400?random=17', duration: '5:00' },
       { id: 2, title: 'Conference Recap', thumbnail: 'https://picsum.photos/300/400?random=18', duration: '4:30' },
       { id: 3, title: 'Birthday Montage', thumbnail: 'https://picsum.photos/300/400?random=19', duration: '3:00' },
-      { id: 4, title: 'Festival Vibes', thumbnail: 'https://picsum.photos/300/400?random=20', duration: '6:00' },
-    ]
-  },
+      { id: 4, title: 'Festival Vibes', thumbnail: 'https: //picsum.photos/300/400?random=20', duration: '6:00' },
+]
+}
+
+,
   {
-    id: 'talking',
+  id: 'talking',
     label: 'Talking-Head',
     icon: 'talking',
     color: 'from-indigo-400 to-blue-500',
@@ -74,19 +76,17 @@ export const portfolioData = [
 ];
 
 export const profileData = {
-  name: 'Ini Oluwa',
-  title: 'Video Editor & Content Creator',
+  name: 'Iniolu visuals',
+  title: 'Videographer & Video Editor',
   bio: 'Creating stunning visual stories that captivate and engage audiences. Specializing in short-form content, brand videos, and event highlights.',
   avatar: 'https://picsum.photos/150/150?random=profile',
   stats: {
     projects: '150+',
-    clients: '50+',
-    experience: '5 years'
+    experience: '2 years'
   },
   social: {
-    instagram: '#',
-    youtube: '#',
-    twitter: '#',
-    email: 'hello@inioluwa.com'
+    instagram: 'https://instagram.com/inioluwa.ng',
+    email: 'mailto:faladeinioluwa@gmail.com',
+    phone: 'tel:+2349120019144'
   }
 };
