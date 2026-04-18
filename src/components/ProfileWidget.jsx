@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, User } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
 import { profileData } from '../data/portfolioData';
 
@@ -17,11 +17,19 @@ export default function ProfileWidget() {
           animate={{ rotate: [0, 5, -5, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <img
-            src={profileData.avatar}
-            alt={profileData.name}
-            className="w-full h-full object-cover"
-          />
+          {profileData.avatar ? (
+            <img
+              src={profileData.avatar}
+              alt={profileData.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+              <span className="text-white font-bold text-lg md:text-xl">
+                {profileData.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+              </span>
+            </div>
+          )}
         </motion.div>
         {/* Online indicator - emerald green */}
         <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />

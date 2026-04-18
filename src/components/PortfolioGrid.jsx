@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Clock } from 'lucide-react';
+import { Play, Clock, X } from 'lucide-react';
 
 export default function PortfolioGrid({ content }) {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
   if (!content) return null;
 
   return (
@@ -34,18 +37,25 @@ export default function PortfolioGrid({ content }) {
               item={item}
               index={index}
               color={content.color}
+              onClick={() => item.youtubeId && setSelectedVideo(item)}
             />
           ))}
         </AnimatePresence>
+
+        <VideoModal
+          video={selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+        />
       </motion.div>
     </div>
   );
 }
 
-function VideoCard({ item, index, color }) {
+function VideoCard({ item, index, color, onClick }) {
   return (
     <motion.div
       className="video-card glass rounded-xl overflow-hidden cursor-pointer group"
+      onClick={onClick}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
@@ -54,12 +64,21 @@ function VideoCard({ item, index, color }) {
     >
       {/* Thumbnail */}
       <div className="relative aspect-[3/4] overflow-hidden">
-        <img
-          src={item.thumbnail}
-          alt={item.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
+        {item.youtubeId ? (
+          <img
+            src={`https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`}
+            alt={item.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+        ) : (
+          <img
+            src={item.thumbnail}
+            alt={item.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+        )}
 
         {/* Play Button Overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
@@ -90,5 +109,62 @@ function VideoCard({ item, index, color }) {
         <div className={`mt-1.5 md:mt-2 h-0.5 md:h-1 rounded-full bg-gradient-to-r ${color} w-2/3`} />
       </div>
     </motion.div>
+  );
+}
+
+function VideoModal({ video, onClose }) {
+  if (!video) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/* Backdrop */}
+        <motion.div
+          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+
+        {/* Video Player */}
+        <motion.div
+          className="relative z-10 w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
+          >
+            <X className="w-5 h-5 text-white" />
+          </button>
+
+          {/* Title */}
+          <div className="absolute top-4 left-4 z-20">
+            <h3 className="text-white font-semibold text-sm md:text-lg">{video.title}</h3>
+          </div>
+
+          {/* YouTube Embed */}
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0`}
+              title={video.title}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
