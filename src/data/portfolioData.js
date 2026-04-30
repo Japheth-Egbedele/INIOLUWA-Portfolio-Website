@@ -1,12 +1,23 @@
 export const portfolioData = [
   {
+    id: 'talking-head',
+    label: 'Talking Head',
+    icon: 'talking-head',
+    color: 'from-purple-400 to-indigo-500',
+    items: [
+      { id: 1, title: 'Talking Head Video', youtubeId: 'IeC94HTP6ao', duration: '1:30' },
+    ]
+  },
+  {
     id: 'reels',
     label: 'Instagram Reels',
     icon: 'reels',
     color: 'from-pink-400 to-rose-500',
     items: [
-      { id: 1, title: 'Insta Reel 1', youtubeId: 'fd48RwfQotQ', duration: '0:30' },
-      { id: 2, title: 'Insta Reel 2', youtubeId: 'FOyhakM2_uI', duration: '0:45' },
+      { id: 1, title: 'Insta Reel 1', youtubeId: 'UthSWhRPia8', duration: '0:45' },
+      { id: 2, title: 'Insta Reel 2', youtubeId: '8ibHmr0CU04', duration: '0:45' },
+      { id: 3, title: 'Insta Reel 3', youtubeId: 'pEcvkgmVIRM', duration: '0:45' },
+      { id: 4, title: 'Insta Reel 4', youtubeId: 'FOyhakM2_uI', duration: '0:45' },
     ]
   },
   {
@@ -15,8 +26,27 @@ export const portfolioData = [
     icon: 'text',
     color: 'from-blue-400 to-cyan-500',
     items: [
-      { id: 1, title: 'Text Based Video', youtubeId: 'pEcvkgmVIRM', duration: '2:30' },
-      { id: 2, title: 'Video Project', youtubeId: 'CcyYQ6ks83M', duration: '1:00' },
+      { id: 1, title: 'Text Based Video', youtubeId: 'jlbEhLzsaVI', duration: '1:00' },
+    ]
+  },
+  {
+    id: 'brand',
+    label: 'Brand Videos',
+    icon: 'brand',
+    color: 'from-amber-400 to-orange-500',
+    items: [
+      { id: 1, title: 'Brand Video 1', youtubeId: 'mY11KG27aRU', duration: '1:30' },
+      { id: 2, title: 'Brand Video 2', youtubeId: 'CcyYQ6ks83M', duration: '1:30' },
+      { id: 3, title: 'Brand Video 3', youtubeId: 'fd48RwfQotQ', duration: '1:00' },
+    ]
+  },
+  {
+    id: 'events',
+    label: 'Event Highlights',
+    icon: 'events',
+    color: 'from-teal-400 to-cyan-500',
+    items: [
+      { id: 1, title: 'Event Highlight', youtubeId: 'oOqihleGy-I', duration: '2:00' },
     ]
   },
 ];

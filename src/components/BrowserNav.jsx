@@ -65,7 +65,7 @@ export default function BrowserNav() {
           {isDark ? (
             <Sun className="w-4 h-4 text-amber-300" />
           ) : (
-            <Moon className="w-4 h-4 text-white" />
+            <Moon className="w-4 h-4 text-gray-800" />
           )}
         </motion.button>
       </div>
@@ -74,10 +74,14 @@ export default function BrowserNav() {
 }
 
 function NavButton({ icon: Icon, onClick }) {
+  const { isDark } = useTheme();
+  const textColor = isDark ? 'text-white/90 hover:text-white' : 'text-gray-700 hover:text-gray-900';
+  const bgHover = isDark ? 'hover:bg-white/20' : 'hover:bg-white/40';
+  
   return (
     <motion.button
       onClick={onClick}
-      className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-white/90 hover:text-white"
+      className={`p-1.5 ${bgHover} rounded-lg transition-colors ${textColor}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >

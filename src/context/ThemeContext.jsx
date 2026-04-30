@@ -12,10 +12,12 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    // Apply theme to document
     const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
+
+    // Tailwind's class-based dark mode keys off `.dark`.
+    // For light mode, keep the DOM clean (no `.light` class needed).
+    root.classList.toggle('dark', theme === 'dark');
+    root.dataset.theme = theme;
     localStorage.setItem('theme', theme);
   }, [theme]);
 
