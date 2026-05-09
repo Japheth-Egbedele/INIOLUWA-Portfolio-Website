@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { portfolioData } from './data/portfolioData';
-import { useTheme } from './context/ThemeContext';
 import WaterBackground from './components/WaterBackground';
 import BrowserNav from './components/BrowserNav';
 import Shelf from './components/Shelf';
@@ -9,46 +8,35 @@ import ProfileWidget from './components/ProfileWidget';
 import PortfolioGrid from './components/PortfolioGrid';
 
 function App() {
-  // Set first folder as default
   const [activeFolder, setActiveFolder] = useState(portfolioData[0].id);
-  useTheme();
 
   const activeContent = portfolioData.find(folder => folder.id === activeFolder);
 
   return (
-    <div
-      className="min-h-screen relative transition-colors duration-300 bg-blue-50 dark:bg-gray-900 text-gray-900 dark:text-white"
-    >
-      {/* Animated Water Background */}
+    <div className="min-h-screen relative bg-zinc-950 text-zinc-100 antialiased selection:bg-emerald-500/30">
       <WaterBackground />
-
-      {/* Browser Chrome Header */}
       <BrowserNav />
 
-      {/* Main Content */}
-      <div className="relative z-10 pt-4 md:pt-8 pb-20">
-        {/* Profile Widget - Separate from shelf */}
-        <div className="w-full max-w-6xl mx-auto px-4 mb-6 md:mb-8">
+      <main className="relative z-10 pt-6 md:pt-10 pb-24 md:pb-28 px-4 md:px-6">
+        <div className="w-full max-w-6xl mx-auto space-y-10 md:space-y-14">
           <ProfileWidget />
+
+          <Shelf>
+            {portfolioData.map((folder) => (
+              <Folder
+                key={folder.id}
+                folder={folder}
+                isActive={activeFolder === folder.id}
+                onClick={() => setActiveFolder(folder.id)}
+              />
+            ))}
+          </Shelf>
+
+          <PortfolioGrid content={activeContent} />
         </div>
-
-        {/* Shelf with Folder Categories */}
-        <Shelf>
-          {portfolioData.map((folder) => (
-            <Folder
-              key={folder.id}
-              folder={folder}
-              isActive={activeFolder === folder.id}
-              onClick={() => setActiveFolder(folder.id)}
-            />
-          ))}
-        </Shelf>
-
-        {/* Portfolio Content Grid */}
-        <PortfolioGrid content={activeContent} />
-      </div>
+      </main>
     </div>
   );
 }
 
-export default App
+export default App;

@@ -3,7 +3,6 @@ export const portfolioData = [
     id: 'talking-head',
     label: 'Talking Head',
     icon: 'talking-head',
-    color: 'from-purple-400 to-indigo-500',
     items: [
       { id: 1, title: 'Talking Head Video', youtubeId: 'IeC94HTP6ao', duration: '1:30' },
     ]
@@ -12,7 +11,6 @@ export const portfolioData = [
     id: 'reels',
     label: 'Instagram Reels',
     icon: 'reels',
-    color: 'from-pink-400 to-rose-500',
     items: [
       { id: 1, title: 'Insta Reel 1', youtubeId: 'UthSWhRPia8', duration: '0:45' },
       { id: 2, title: 'Insta Reel 2', youtubeId: '8ibHmr0CU04', duration: '0:45' },
@@ -24,7 +22,6 @@ export const portfolioData = [
     id: 'text',
     label: 'Text-Based',
     icon: 'text',
-    color: 'from-blue-400 to-cyan-500',
     items: [
       { id: 1, title: 'Text Based Video', youtubeId: 'jlbEhLzsaVI', duration: '1:00' },
     ]
@@ -33,7 +30,6 @@ export const portfolioData = [
     id: 'brand',
     label: 'Brand Videos',
     icon: 'brand',
-    color: 'from-amber-400 to-orange-500',
     items: [
       { id: 1, title: 'Brand Video 1', youtubeId: 'mY11KG27aRU', duration: '1:30' },
       { id: 2, title: 'Brand Video 2', youtubeId: 'CcyYQ6ks83M', duration: '1:30' },
@@ -44,9 +40,9 @@ export const portfolioData = [
     id: 'events',
     label: 'Event Highlights',
     icon: 'events',
-    color: 'from-teal-400 to-cyan-500',
     items: [
       { id: 1, title: 'Event Highlight', youtubeId: 'oOqihleGy-I', duration: '2:00' },
+      { id: 2, title: 'Event Short', youtubeId: 'ajcCA5Y5H3I', duration: '1:00' },
     ]
   },
 ];
@@ -55,7 +51,7 @@ export const profileData = {
   name: 'Iniolu visuals',
   title: 'Videographer & Video Editor',
   bio: 'Creating stunning visual stories that captivate and engage audiences. Specializing in short-form content, brand videos, and event highlights.',
-  avatar: null,
+  avatar: '/logo.png',
   stats: {
     projects: '150+',
     experience: '2 years'

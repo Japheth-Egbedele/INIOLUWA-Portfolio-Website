@@ -1,14 +1,11 @@
-import { motion } from 'framer-motion';
-
 export default function Shelf({ children }) {
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 mb-6 md:mb-8">
-      <div className="glass rounded-2xl md:rounded-3xl p-3 md:p-6 shadow-2xl">
-        {/* All folders in flex row - scrollable on mobile, centered on desktop */}
-        <div className="flex items-end justify-center gap-2 md:gap-4 flex-wrap md:flex-nowrap">
+    <section className="w-full" aria-label="Video categories">
+      <div className="rounded-2xl md:rounded-3xl border border-white/5 bg-zinc-900/55 backdrop-blur-md p-4 md:p-8 shadow-xl shadow-black/30">
+        <div className="categories-scroll flex items-end justify-start md:justify-center gap-4 md:gap-6 flex-nowrap overflow-x-auto pb-1 snap-x snap-mandatory md:snap-none [-ms-overflow-style:none] [scrollbar-width:thin]">
           {children}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
