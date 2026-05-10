@@ -4,8 +4,9 @@ import { Play, Clock, X } from 'lucide-react';
 
 const ACCENT_GRADIENT = 'from-emerald-400 to-teal-500';
 
-export default function PortfolioGrid({ content }) {
+export default function PortfolioGrid({ content, theme }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const isLight = theme === 'light';
 
   if (!content) return null;
 
@@ -19,10 +20,10 @@ export default function PortfolioGrid({ content }) {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={`w-1 h-7 md:h-9 rounded-full bg-gradient-to-b ${ACCENT_GRADIENT} shrink-0`} />
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-50">
+        <h2 className={`text-2xl md:text-3xl font-semibold tracking-tight ${isLight ? 'text-zinc-950' : 'text-zinc-50'}`}>
           {content.label}
         </h2>
-        <span className="text-sm text-zinc-500 tabular-nums">
+        <span className={`text-sm tabular-nums ${isLight ? 'text-zinc-600' : 'text-zinc-500'}`}>
           {content.items.length} {content.items.length === 1 ? 'video' : 'videos'}
         </span>
       </motion.div>
@@ -38,6 +39,7 @@ export default function PortfolioGrid({ content }) {
               item={item}
               index={index}
               onClick={() => item.youtubeId && setSelectedVideo(item)}
+              theme={theme}
             />
           ))}
         </AnimatePresence>
@@ -45,16 +47,23 @@ export default function PortfolioGrid({ content }) {
         <VideoModal
           video={selectedVideo}
           onClose={() => setSelectedVideo(null)}
+          theme={theme}
         />
       </motion.div>
     </div>
   );
 }
 
-function VideoCard({ item, index, onClick }) {
+function VideoCard({ item, index, onClick, theme }) {
+  const isLight = theme === 'light';
+
   return (
     <motion.div
-      className="video-card rounded-xl overflow-hidden cursor-pointer group border border-white/10 bg-zinc-900/40 shadow-lg shadow-black/20"
+      className={`video-card rounded-xl overflow-hidden cursor-pointer group border shadow-lg transition-colors ${
+        isLight
+          ? 'border-emerald-900/10 bg-white/80 shadow-emerald-950/10'
+          : 'border-white/10 bg-zinc-900/40 shadow-black/20'
+      }`}
       onClick={onClick}
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
@@ -62,7 +71,7 @@ function VideoCard({ item, index, onClick }) {
       transition={{ delay: index * 0.04, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-zinc-900">
+      <div className={`relative aspect-[3/4] overflow-hidden ${isLight ? 'bg-zinc-100' : 'bg-zinc-900'}`}>
         {item.youtubeId ? (
           <img
             src={`https://img.youtube.com/vi/${item.youtubeId}/mqdefault.jpg`}
@@ -97,7 +106,7 @@ function VideoCard({ item, index, onClick }) {
       </div>
 
       <div className="p-3 md:p-4">
-        <h3 className="text-zinc-200 font-medium text-xs md:text-sm truncate leading-snug">
+        <h3 className={`font-medium text-xs md:text-sm truncate leading-snug ${isLight ? 'text-zinc-800' : 'text-zinc-200'}`}>
           {item.title}
         </h3>
         <div className={`mt-2 h-0.5 rounded-full bg-gradient-to-r ${ACCENT_GRADIENT} w-1/2 opacity-90`} />
@@ -106,19 +115,21 @@ function VideoCard({ item, index, onClick }) {
   );
 }
 
-function VideoModal({ video, onClose }) {
+function VideoModal({ video, onClose, theme }) {
+  const isLight = theme === 'light';
+
   if (!video) return null;
 
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 z-[60] flex items-center justify-center p-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="absolute inset-0 bg-black/85 backdrop-blur-sm"
+          className={`absolute inset-0 backdrop-blur-sm ${isLight ? 'bg-zinc-950/65' : 'bg-black/85'}`}
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -126,7 +137,9 @@ function VideoModal({ video, onClose }) {
         />
 
         <motion.div
-          className="relative z-10 w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+          className={`relative z-10 w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border ${
+            isLight ? 'border-white/50 shadow-emerald-950/20' : 'border-white/10'
+          }`}
           initial={{ scale: 0.96, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.96, opacity: 0 }}
@@ -136,6 +149,7 @@ function VideoModal({ video, onClose }) {
             type="button"
             onClick={onClose}
             className="absolute top-4 right-4 z-20 p-2 bg-black/60 hover:bg-black/80 rounded-full transition-colors border border-white/10"
+            aria-label="Close video"
           >
             <X className="w-5 h-5 text-white" />
           </button>
